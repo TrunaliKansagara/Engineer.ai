@@ -168,7 +168,7 @@ export class Api {
   async getWeatherDetail(countryName: string): Promise<Types.GetWeatherResult> {
     // make the api call
     const response: ApiResponse<any> = await this.apisauce.get(
-      `http://api.weatherstack.com/current?access_key=8d4aefc08509640b61bdd7dba916e00a&query=${countryName}`,
+      `http://api.weatherstack.com/current?access_key=1527fd41470d4349f468084a4daa1d64&query=${countryName}`,
     )
 
     if (!response.ok) {
