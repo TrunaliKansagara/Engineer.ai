@@ -35,6 +35,7 @@
   "home":{
     "countryDemo":"Country Input",
     "postList":"Post List",
-    "randomAstData":"Random AstData"
+    "randomAstData":"Random AstData",
+    "geoLocation":"GeoLocation"
   }
 }

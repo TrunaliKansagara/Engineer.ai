@@ -26,12 +26,9 @@ export const CountryStoreModel = types
           for (let i = 0; i <= data.length; i++) {
             if (data[i].name === self.countryName) {
               self.countryData = data[i]
-            } else {
-              self.countryData = data[0]
+              self.isLoading = false
             }
           }
-
-          self.isLoading = false
         } else {
           self.isLoading = false
           self.countryData = null

@@ -54,6 +54,7 @@ export const HomeScreen = observer(function HomeScreen() {
           {renderView("home.countryDemo", "countryInput")}
           {renderView("home.postList", "postList")}
           {renderView("home.randomAstData", "inputScreen")}
+          {renderView("home.geoLocation", "geoLocation")}
         </View>
       </Screen>
     </View>

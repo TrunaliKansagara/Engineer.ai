@@ -19,6 +19,7 @@ import {
   CountryInputScreen,
   CountryDetailScreen,
   HomeScreen,
+  GeoLocationScreen,
 } from "../screens"
 
 /**
@@ -45,6 +46,7 @@ export type PrimaryParamList = {
   countryInput: undefined
   countryDetail: undefined
   home: undefined
+  geoLocation:undefined
 }
 
 // Documentation: https://github.com/software-mansion/react-native-screens/tree/master/native-stack
@@ -73,6 +75,7 @@ export function PrimaryNavigator() {
       <Stack.Screen name="userlist" component={UserListScreen} />
       <Stack.Screen name="welcome" component={WelcomeScreen} />
       <Stack.Screen name="demo" component={DemoScreen} />
+      <Stack.Screen name="geoLocation" component={GeoLocationScreen} />
     </Stack.Navigator>
   )
 }
