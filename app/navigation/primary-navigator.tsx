@@ -7,7 +7,19 @@
 import React from "react"
 
 import { createNativeStackNavigator } from "react-native-screens/native-stack"
-import { WelcomeScreen, DemoScreen } from "../screens"
+import {
+  WelcomeScreen,
+  DemoScreen,
+  MobxDemoScreen,
+  UserListScreen,
+  PostListScreen,
+  PostListDetailScreen,
+  InputScreen,
+  InputDetailScreen,
+  CountryInputScreen,
+  CountryDetailScreen,
+  HomeScreen,
+} from "../screens"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -24,6 +36,15 @@ import { WelcomeScreen, DemoScreen } from "../screens"
 export type PrimaryParamList = {
   welcome: undefined
   demo: undefined
+  mobx: undefined
+  userlist: undefined
+  postList: undefined
+  postListDetail: undefined
+  inputScreen: undefined
+  inputDetail: undefined
+  countryInput: undefined
+  countryDetail: undefined
+  home: undefined
 }
 
 // Documentation: https://github.com/software-mansion/react-native-screens/tree/master/native-stack
@@ -33,10 +54,23 @@ export function PrimaryNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
         gestureEnabled: true,
       }}
+      initialRouteName="home"
+
     >
+      <Stack.Screen name="home" component={HomeScreen} />
+      <Stack.Screen name="countryInput" component={CountryInputScreen} />
+      <Stack.Screen name="postList" component={PostListScreen} />
+      <Stack.Screen name="inputScreen" component={InputScreen} />
+      <Stack.Screen name="countryDetail" component={CountryDetailScreen} />
+
+      <Stack.Screen name="inputDetail" component={InputDetailScreen} />
+
+      <Stack.Screen name="postListDetail" component={PostListDetailScreen} />
+      <Stack.Screen name="mobx" component={MobxDemoScreen} />
+      <Stack.Screen name="userlist" component={UserListScreen} />
       <Stack.Screen name="welcome" component={WelcomeScreen} />
       <Stack.Screen name="demo" component={DemoScreen} />
     </Stack.Navigator>
