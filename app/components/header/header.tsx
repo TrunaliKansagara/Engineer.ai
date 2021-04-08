@@ -4,8 +4,9 @@ import { HeaderProps } from "./header.props"
 import { Button } from "../button/button"
 import { Text } from "../text/text"
 import { Icon } from "../icon/icon"
-import { spacing } from "../../theme"
+import { color, spacing } from "../../theme"
 import { translate } from "../../i18n/"
+import { useNavigation } from "@react-navigation/native"
 
 // static styles
 const ROOT: ViewStyle = {
@@ -15,6 +16,7 @@ const ROOT: ViewStyle = {
   paddingTop: spacing[5],
   paddingBottom: spacing[5],
   justifyContent: "flex-start",
+  backgroundColor:color.palette.black
 }
 const TITLE: TextStyle = { textAlign: "center" }
 const TITLE_MIDDLE: ViewStyle = { flex: 1, justifyContent: "center" }
@@ -36,11 +38,14 @@ export function Header(props: HeaderProps) {
     titleStyle,
   } = props
   const header = headerText || (headerTx && translate(headerTx)) || ""
-
+  const navigation = useNavigation()
+  const goBack = () => {
+    navigation.goBack()
+  }
   return (
     <View style={{ ...ROOT, ...style }}>
       {leftIcon ? (
-        <Button preset="link" onPress={onLeftPress}>
+        <Button preset="link" onPress={onLeftPress || goBack}>
           <Icon icon={leftIcon} />
         </Button>
       ) : (

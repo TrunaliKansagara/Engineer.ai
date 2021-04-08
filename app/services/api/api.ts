@@ -2,6 +2,7 @@ import { ApisauceInstance, create, ApiResponse } from "apisauce"
 import { getGeneralApiProblem } from "./api-problem"
 import { ApiConfig, DEFAULT_API_CONFIG } from "./api-config"
 import * as Types from "./api.types"
+import { API_TOKEN } from "../../utils/utils"
 
 /**
  * Manages all requests to the API.
@@ -95,6 +96,87 @@ export class Api {
         name: response.data.name,
       }
       return { kind: "ok", user: resultUser }
+    } catch {
+      return { kind: "bad-data" }
+    }
+  }
+  // api of post list demo
+  async getPost(pageNo: number): Promise<Types.GetUserPost> {
+    // make the api call
+    const response: ApiResponse<any> = await this.apisauce.get(
+      `/search_by_date?tags=story&page=${pageNo}`,
+    )
+
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+    try {
+      return { kind: "ok", post: response.data }
+    } catch {
+      return { kind: "bad-data" }
+    }
+  }
+
+  // api  of astId and random id demo
+
+  async getRandomID(): Promise<Types.GetUserPost> {
+    // make the api call
+    const response: ApiResponse<any> = await this.apisauce.get(`https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=` + API_TOKEN)
+
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+    try {
+      return { kind: "ok", post: response.data }
+    } catch {
+      return { kind: "bad-data" }
+    }
+  }
+
+  async getID(ID: string): Promise<Types.GetUserPost> {
+    // make the api call
+    const response: ApiResponse<any> = await this.apisauce.get(`https://api.nasa.gov/neo/rest/v1/neo/${ID}?api_key=` + API_TOKEN)
+
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+    try {
+      return { kind: "ok", post: response.data }
+    } catch {
+      return { kind: "bad-data" }
+    }
+  }
+  async getCountries(countryName: string): Promise<Types.GetCountryData> {
+    // make the api call
+    const response: ApiResponse<any> = await this.apisauce.get(
+      "https://restcountries.eu/rest/v2/name/" + countryName,
+    )
+
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+    try {
+      return { kind: "ok", country: response.data }
+    } catch {
+      return { kind: "bad-data" }
+    }
+  }
+  async getWeatherDetail(countryName: string): Promise<Types.GetWeatherResult> {
+    // make the api call
+    const response: ApiResponse<any> = await this.apisauce.get(
+      `http://api.weatherstack.com/current?access_key=8d4aefc08509640b61bdd7dba916e00a&query=${countryName}`,
+    )
+
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+    try {
+      return { kind: "ok", weather: response.data }
     } catch {
       return { kind: "bad-data" }
     }

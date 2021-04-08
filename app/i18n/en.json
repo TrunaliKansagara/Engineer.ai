@@ -23,5 +23,18 @@
   "storybook": {
     "placeholder": "Placeholder",
     "field": "Field"
+  },
+  "input":{
+    "randomId":"Random Id",
+    "submit":"Submit"
+  },
+  "country":{
+    "enterCountry":"Enter Country",
+    "submit":"Submit"
+  },
+  "home":{
+    "countryDemo":"Country Input",
+    "postList":"Post List",
+    "randomAstData":"Random AstData"
   }
 }
