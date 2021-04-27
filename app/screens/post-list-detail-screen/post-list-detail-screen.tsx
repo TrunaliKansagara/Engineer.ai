@@ -22,12 +22,17 @@ const CONTAINER: ViewStyle = {
   borderBottomColor: color.palette.lightGrey,
   marginTop:10
 }
-
+export interface PostListDetail{
+  title?: string;
+  url?: string;
+  created_at?: Date;
+  // author?:string
+}
 export const PostListDetailScreen = observer(function PostListDetailScreen() {
   const { postListStore } = useStores()
   const { postDetail } = postListStore
 
-  const renderItem = (label: string, value: any) => {
+  const renderItem = (label: string, value: PostListDetail) => {
     return (
       <>
         {postDetail ? (

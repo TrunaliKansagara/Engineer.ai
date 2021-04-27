@@ -1,6 +1,13 @@
 import React, { useEffect } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle, FlatList, TextStyle, View, TouchableOpacity, ActivityIndicator } from "react-native"
+import {
+  ViewStyle,
+  FlatList,
+  TextStyle,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native"
 import { Screen, Text } from "../../components"
 // import { useNavigation } from "@react-navigation/native"
 import { useStores } from "../../models"
@@ -26,10 +33,14 @@ const LISTCONTAINER: ViewStyle = {
   backgroundColor: color.palette.offWhite,
 }
 
+export interface PostList {
+  title?: string
+  author?: string
+  url?: string
+}
 export const PostListScreen = observer(function PostListScreen() {
-  
   const { postListStore } = useStores()
-  const navigation=useNavigation()
+  const navigation = useNavigation()
   const { posts, getPosts, getLoadMorePost, updatePostDetail } = postListStore
 
   useEffect(() => {
@@ -42,7 +53,7 @@ export const PostListScreen = observer(function PostListScreen() {
     }
   }, [])
 
-  const renderList = (item, index) => {
+  const renderList = (item: PostList, index: number) => {
     return (
       <TouchableOpacity
         style={LISTCONTAINER}
@@ -57,12 +68,12 @@ export const PostListScreen = observer(function PostListScreen() {
     )
   }
 
-  const onItemPress = (item: any) => {
+  const onItemPress = (item: object) => {
     updatePostDetail(item)
     navigation.navigate("postListDetail")
   }
 
-  const emptyComponent = () => {
+  const ItemEmptyComponent = () => {
     return <Text text={"No data available"} style={TITLE} />
   }
 
@@ -72,7 +83,7 @@ export const PostListScreen = observer(function PostListScreen() {
     }
   }
 
-  const separate = () => {
+  const ItemSeparateView = () => {
     return <View style={SEPERATE} />
   }
 
@@ -81,14 +92,12 @@ export const PostListScreen = observer(function PostListScreen() {
       <FlatList
         data={posts}
         renderItem={({ item, index }) => renderList(item, index)}
-        ListEmptyComponent={emptyComponent}
+        ListEmptyComponent={ItemEmptyComponent}
         keyExtractor={(item, index) => index.toString()}
         onEndReached={onEndReached}
         onEndReachedThreshold={0.1}
-        ItemSeparatorComponent={separate}
-        ListFooterComponent={
-                 <ActivityIndicator color={color.palette.angry} /> 
-                }
+        ItemSeparatorComponent={ItemSeparateView}
+        ListFooterComponent={<ActivityIndicator color={color.palette.angry} />}
       />
     </Screen>
   )

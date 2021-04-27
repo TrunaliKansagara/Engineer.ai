@@ -26,7 +26,8 @@
   },
   "input":{
     "randomId":"Random Id",
-    "submit":"Submit"
+    "submit":"Submit",
+    "enterAstID":"Enter Asteroid ID"
   },
   "country":{
     "enterCountry":"Enter Country",
@@ -36,6 +37,13 @@
     "countryDemo":"Country Input",
     "postList":"Post List",
     "randomAstData":"Random AstData",
-    "geoLocation":"GeoLocation"
+    "geoLocation":"GeoLocation",
+    "userList":"User List",
+    "trafficSignal":"Traffic Signal"
+  },
+  "post":{
+    "title":"Title:",
+    "author":"Author:",
+    "url":"Url:"
   }
 }

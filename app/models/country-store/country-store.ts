@@ -60,6 +60,9 @@ export const CountryStoreModel = types
     clearWeatherDetail() {
       self.weatherData = null
     },
+    updateCountryData() {
+      self.countryData = null
+    },
   })) // eslint-disable-line @typescript-eslint/no-unused-vars
 
 /**

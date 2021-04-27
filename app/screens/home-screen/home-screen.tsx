@@ -51,10 +51,13 @@ export const HomeScreen = observer(function HomeScreen() {
     <View style={FULL}>
       <Screen style={ROOT} preset="scroll">
         <View style={CONTAINER}>
-          {renderView("home.countryDemo", "countryInput")}
+          {/* {renderView("home.countryDemo", "countryInput")}
           {renderView("home.postList", "postList")}
           {renderView("home.randomAstData", "inputScreen")}
-          {renderView("home.geoLocation", "geoLocation")}
+          {renderView("home.userList", "userList")}
+          {renderView("home.trafficSignal", "trafficSignal")} */}
+          {renderView("home.postList", "postList1")}
+          {renderView("home.randomAstData", "astInput")}
         </View>
       </Screen>
     </View>

@@ -32,8 +32,17 @@ const BUTTON_TEXT: TextStyle = {
 export const CountryInputScreen = observer(function CountryInputScreen() {
   // Pull in one of our MST stores
   const { countryStore } = useStores()
-  const navigation=useNavigation()
-  const { countryName, getCountryDetail, updateCountry, isLoading ,countryData,clearWeatherDetail} = countryStore
+  const navigation = useNavigation()
+  const {
+    countryName,
+    getCountryDetail,
+    updateCountry,
+    isLoading,
+    countryData,
+    clearWeatherDetail,
+    updateCountryData,
+  } = countryStore
+
   const onSubmitPress = () => {
     getCountryDetail()
     clearWeatherDetail()
@@ -41,15 +50,15 @@ export const CountryInputScreen = observer(function CountryInputScreen() {
 
   useEffect(() => {
     // if (isLoading) {
-    if (countryData) {
-        console.log("countyData",countryData)
-       navigation.navigate("countryDetail")
-      } else {
-        Alert.alert("No data found")
-        console.log("no data found")
-     }
-  //  }
-  },[countryData])
+    if (countryData !== null) {
+      console.log("countyData", countryData)
+      navigation.navigate("countryDetail")
+    } else {
+      Alert.alert("No data found")
+      console.log("no data found")
+    }
+    //  }
+  }, [countryData])
   return (
     <View style={FULL}>
       <Screen style={ROOT} preset="scroll">
@@ -62,15 +71,17 @@ export const CountryInputScreen = observer(function CountryInputScreen() {
           placeholderTextColor={color.palette.black}
         />
         <Button
-          disabled={countryName?false:true}
-          style={[BUTTONSTYLE,{backgroundColor:countryName?color.primary:color.palette.lightGrey}]}
+          disabled={countryName ? false : true}
+          style={[
+            BUTTONSTYLE,
+            { backgroundColor: countryName ? color.primary : color.palette.lightGrey },
+          ]}
           tx={"country.submit"}
           textStyle={BUTTON_TEXT}
           isLoading={isLoading}
           onPress={() => {
             onSubmitPress()
           }}
-        
         />
       </Screen>
     </View>

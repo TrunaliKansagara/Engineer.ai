@@ -20,6 +20,12 @@ import {
   CountryDetailScreen,
   HomeScreen,
   GeoLocationScreen,
+  TraficSignalScreen,
+  SettingScreen,
+  PostList1Screen,
+  PostListDetail1Screen,
+  AsertionInputScreen,
+  AstDataDetailScreen,
 } from "../screens"
 
 /**
@@ -46,7 +52,14 @@ export type PrimaryParamList = {
   countryInput: undefined
   countryDetail: undefined
   home: undefined
-  geoLocation:undefined
+  geoLocation: undefined
+  userList: undefined
+  trafficSignal: undefined
+  setting: undefined
+  postList1: undefined
+  postListDetail1: undefined
+  astInput: undefined
+  astDataDetail:undefined
 }
 
 // Documentation: https://github.com/software-mansion/react-native-screens/tree/master/native-stack
@@ -60,9 +73,12 @@ export function PrimaryNavigator() {
         gestureEnabled: true,
       }}
       initialRouteName="home"
-
     >
       <Stack.Screen name="home" component={HomeScreen} />
+      <Stack.Screen name="postList1" component={PostList1Screen} />
+      <Stack.Screen name="astInput" component={AsertionInputScreen} />
+      <Stack.Screen name="astDataDetail" component={AstDataDetailScreen} />
+      <Stack.Screen name="postListDetail1" component={PostListDetail1Screen} />
       <Stack.Screen name="countryInput" component={CountryInputScreen} />
       <Stack.Screen name="postList" component={PostListScreen} />
       <Stack.Screen name="inputScreen" component={InputScreen} />
@@ -75,7 +91,9 @@ export function PrimaryNavigator() {
       <Stack.Screen name="userlist" component={UserListScreen} />
       <Stack.Screen name="welcome" component={WelcomeScreen} />
       <Stack.Screen name="demo" component={DemoScreen} />
-      <Stack.Screen name="geoLocation" component={GeoLocationScreen} />
+      <Stack.Screen name="userList" component={UserListScreen} />
+      <Stack.Screen name="trafficSignal" component={TraficSignalScreen} />
+      <Stack.Screen name="setting" component={SettingScreen} />
     </Stack.Navigator>
   )
 }

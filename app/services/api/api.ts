@@ -2,7 +2,7 @@ import { ApisauceInstance, create, ApiResponse } from "apisauce"
 import { getGeneralApiProblem } from "./api-problem"
 import { ApiConfig, DEFAULT_API_CONFIG } from "./api-config"
 import * as Types from "./api.types"
-import { API_TOKEN } from "../../utils/utils"
+import { API_TOKEN, API_URL } from "../../utils/utils"
 
 /**
  * Manages all requests to the API.
@@ -122,7 +122,9 @@ export class Api {
 
   async getRandomID(): Promise<Types.GetUserPost> {
     // make the api call
-    const response: ApiResponse<any> = await this.apisauce.get(`https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=` + API_TOKEN)
+    const response: ApiResponse<any> = await this.apisauce.get(
+      `https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=` + API_TOKEN,
+    )
 
     if (!response.ok) {
       const problem = getGeneralApiProblem(response)
@@ -137,7 +139,9 @@ export class Api {
 
   async getID(ID: string): Promise<Types.GetUserPost> {
     // make the api call
-    const response: ApiResponse<any> = await this.apisauce.get(`https://api.nasa.gov/neo/rest/v1/neo/${ID}?api_key=` + API_TOKEN)
+    const response: ApiResponse<any> = await this.apisauce.get(
+      `https://api.nasa.gov/neo/rest/v1/neo/${ID}?api_key=` + API_TOKEN,
+    )
 
     if (!response.ok) {
       const problem = getGeneralApiProblem(response)
@@ -178,6 +182,65 @@ export class Api {
     try {
       return { kind: "ok", weather: response.data }
     } catch {
+      return { kind: "bad-data" }
+    }
+  }
+  async getUserList(offset: number): Promise<Types.GetUserResults> {
+    // make the api call
+    console.log("offset", offset)
+    const response: ApiResponse<any> = await this.apisauce.get(
+      `http://sd2-hiring.herokuapp.com/api/users?offset=${offset}&limit=10?`,
+    )
+
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+    try {
+      return { kind: "ok", user: response.data }
+    } catch {
+      return { kind: "bad-data" }
+    }
+  }
+  async getPostListData(pageNo: number): Promise<Types.GetUserPost1> {
+    const response: ApiResponse<any> = await this.apisauce.get(
+      `https://hn.algolia.com/api/v1/search_by_date?tags=story&page=${pageNo}`,
+    )
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+    try {
+      return { kind: "ok", post: response.data }
+    } catch (error) {
+      return { kind: "bad-data" }
+    }
+  }
+  async getAstData(ID: string): Promise<Types.GetAstData> {
+    const response: ApiResponse<any> = await this.apisauce.get(
+      `https://api.nasa.gov/neo/rest/v1/neo/${ID}?api_key=${API_URL}`,
+    )
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+    try {
+      return { kind: "ok", astData: response.data }
+    } catch (error) {
+      return { kind: "bad-data" }
+    }
+  }
+  async getRandomId(): Promise<Types.GetAstData> {
+    const response: ApiResponse<any> = await this.apisauce.get(
+      `https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=${API_URL}`,
+    )
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+    try {
+      return { kind: "ok", astData: response.data }
+    } catch (error) {
       return { kind: "bad-data" }
     }
   }
